@@ -1,0 +1,88 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_filters %}
+{% load django_hide %}
+
+{% block content %}
+
+  <!-- MAIN -->
+
+  <div class="col p-4">
+
+    <div class="card">
+
+      <div class="card-header bg-primary text-white">Article Create Form</div>
+
+      <form method="post" enctype="multipart/form-data" novalidate>{% h_csrf_token %}
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-6">
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-6">
+              {{ form.slug|as_crispy_field }}
+            </div>
+            <div dir="ltr" class="col-12 d-flex justify-content-center">
+              {{ form.description|as_crispy_field }}
+            </div>
+            <div class="col-6">
+              {{ form.category|as_crispy_field }}
+            </div>
+            <div class="col-6">
+              {{ form.thumbnail|as_crispy_field }}
+              {{ form.editors_choice|as_crispy_field }}
+            </div>
+            <div class="col-4">
+              {{ form.publish|as_crispy_field }}
+            </div>
+            {% if user.is_superuser %}
+              <div class="col-4">
+                {{ form.author|as_crispy_field }}
+              </div>
+              <div class="col-4">
+                {{ form.status|as_crispy_field }}
+              </div>
+            {% else %}
+              <div class="col-6">
+                <div id="div_id_status" class="form-group">
+                  <label for="id_status" class=" requiredField">
+                    status<span class="asteriskField">*</span>
+                  </label>
+                  <div class="">
+                    <select name="status" class="select form-control" required="" id="id_status">
+                      <option value="">---------</option>
+                      <option value="d">draft</option>
+                      <option value="i">send to admin</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            <div class="col-12">
+              {{ form.admin_comment|as_crispy_field }}
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="card-footer">
+
+          <button class="btn btn-success">Save</button>
+          {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+            <a href="{% url 'account:article-delete' request.resolver_match.kwargs.pk %}"
+               class="btn btn-danger">Delete</a>
+          {% endif %}
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- Main Col END -->
+
+{% endblock %}

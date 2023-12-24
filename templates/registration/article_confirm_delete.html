@@ -1,0 +1,40 @@
+{% extends 'registration/base.html' %}
+{% load django_hide %}
+
+{% block content %}
+
+  <!-- MAIN -->
+
+  <div class="col p-4">
+
+    <div class="card">
+
+      <div class="card-header bg-danger text-white">Delete Article</div>
+
+      <form method="post">{% h_csrf_token %}
+
+        <div class="card-body">
+
+          <p class="py-2">Are you sure you want to delete article
+            « {{ object.title }} »
+            from
+            « {{ object.author.get_full_name }} »
+            ?
+          </p>
+
+        </div>
+
+        <div class="card-footer">
+
+          <input type="submit" value="حذف" class="btn btn-danger">
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Main Col END -->
+
+{% endblock %}

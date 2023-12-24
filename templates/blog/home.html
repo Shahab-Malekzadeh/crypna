@@ -1,0 +1,501 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Call to Action Well -->
+    <div class="card row my-5 py-4 text-center">
+      <div class="card-body">
+        <p class="home-text text-dark m-0">
+          This call to action card is a great place to showcase some important
+          information or display a clever tagline!
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Heading Row -->
+    <div class="row shadow shadow-sm rounded">
+
+      <div id="carouselExampleFade"
+           class="carousel carousel-style slide carousel-fade col-md-12 col-lg-8 col-lg-8 p-2 carousel-mask"
+           data-ride="carousel">
+        <div class="carousel-inner">
+
+          {% for article in editors_choice %}
+
+            {% if forloop.counter == 1 %}
+
+              <div class="carousel-item active">
+
+            {% else %}
+
+              <div class="carousel-item">
+
+            {% endif %}
+
+                <img class="img-responsive mx-auto" src="{{ article.thumbnail.url }}" alt="">
+
+                <div class="carousel-caption fixed-top py-0">
+
+                <a class="link" href="{% url 'blog:detail' article.slug %}">
+
+                  <p class="home-text text-white py-3 py-md-4 h5" style="background: rgba(48,48,48,.8);">
+                    <strong>{{ article.title }}</strong>
+                  </p>
+
+                </a>
+
+                </div>
+
+                <div class="carousel-caption fixed-bottom py-0">
+                  <p class="home-text-small my-0 py-2 py-md-4" style="background: rgba(48,48,48,.8);">
+                    by
+                    {% if article.author.get_full_name %}
+                      {{ article.author.get_full_name }}
+                    {% else %}
+                      {{ article.author.username }}
+                    {% endif %}
+                    |
+                    {{ article.when_published }}
+                  </p>
+                </div>
+
+              </div>
+
+          {% empty %}
+            <h1>There is no picture to show </h1>
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <!-- /.col-lg-4 -->
+      <div class="col-md-12 col-lg-4 p-2">
+
+        <!-- Tabs navs -->
+        <ul class="tab-style nav nav-pills" role="tablist">
+          <li class="nav-item w-50 text-center">
+            <a class="nav-link custom-nav home-text font-weight-bold active" data-toggle="pill" href="#menu1">Editor's
+              Choice</a>
+          </li>
+          <li class="nav-item w-50 text-center">
+            <a class="nav-link custom-nav home-text font-weight-bold" data-toggle="pill" href="#menu2">Hot News</a>
+          </li>
+        </ul>
+
+
+        <div class="tab-content my-3">
+          <div id="menu1" class="container tab-pane active">
+
+            {% for article in editors_choice %}
+
+              <a class="link" href="{% url 'blog:detail' article.slug %}">
+                <p class="mb-0 home-text">
+                  <strong>{{ article.title }}</strong>
+                </p>
+              </a>
+
+              <hr style="border: 1px solid #eee;">
+
+            {% empty %}
+              <h1>There is no picture to show</h1>
+
+            {% endfor %}
+
+          </div>
+
+          <div id="menu2" class="container tab-pane fade">
+
+            {% for article in hot_news %}
+
+              <a class="link" href="{% url 'blog:detail' article.slug %}">
+                <p class="mb-0 home-text">
+                  <strong>{{ article.title }}</strong>
+                </p>
+
+                <p class="mb-0 text-right home-text">
+                  <small class="text-muted mr-0">
+                    <i class="fa fa-eye"></i>
+                    {{ article.hits.count }}
+                  </small>
+                </p>
+              </a>
+
+            <hr class="mt-1" style="border: 1px solid #eee;">
+
+
+            {% empty %}
+              <h2>Nothing to show in Hot News</h2>
+            {% endfor %}
+
+
+          </div>
+
+        </div>
+        <!-- Tabs navs -->
+
+      </div>
+      <!-- /.col-md-4 -->
+
+    </div>
+    <!-- /.row -->
+
+
+    <div class="post-slider-style row my-5">
+
+      <div class="owl-carousel owl-theme col-12 col-sm-10 col-md-12 mx-auto p-0">
+
+        {% for article in all_articles %}
+
+        <div class="item mx-1">
+          <div class="card shadow-sm border-0 my-2">
+
+            <a class="link" href="{% url 'blog:detail' article.slug %}">
+
+              <img class="card-img-top" src="{{ article.thumbnail.url }}" alt="Card image" style="width:100%">
+
+              <div class="card-body pb-2">
+
+                  <p class="card-title home-text mb-3 h5">
+                    {{ article.title }}
+                  </p>
+
+
+                <div class="d-flex justify-content-between">
+                  <small class="home-text-small text-muted font-weight-bold">
+                    <i class="fa fa-user"></i>
+                    {% if article.author.get_full_name %}
+                      {{ article.author.get_full_name }}
+                    {% else %}
+                      {{ article.author.username }}
+                    {% endif %}
+                  </small>
+                  <small class="home-text-small text-muted font-weight-bold">
+                    <i class="fa fa-calendar"></i>
+                    {{ article.publish }}
+                  </small>
+                </div>
+
+              </div>
+
+            </a>
+
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+
+    <div class="card-section row my-5">
+
+      {% for article in post_grid %}
+
+        <div class="col-11 col-sm-10 col-md-6 col-lg-4 col-xl-4 mx-auto px-1 py-2">
+
+          <a class="link" href="{% url 'blog:detail' article.slug %}">
+
+            <div class="card card-count shadow-sm border-0">
+
+              <div class="hover-effect">
+                <img class="img-responsive mx-auto" src="{{ article.thumbnail.url }}" alt="">
+                <div class="overlay">
+                  <h2 class="home-heading h4">
+                    {{ article.when_published }}
+                  </h2>
+                  <p class="home-text px-2">
+                    {{ article.description|striptags|safe|truncatewords:20 }}
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                  <p class="card-text home-text mb-0 h5">
+                    {{ article.title }}
+                  </p>
+
+              </div>
+
+              <div class="card-footer border-0 d-flex justify-content-between">
+                <small class="home-text-small text-muted font-weight-bold">
+                  <i class="fa fa-user"></i>
+                  {% if article.author.get_full_name %}
+                    {{ article.author.get_full_name }}
+                  {% else %}
+                    {{ article.author.username }}
+                  {% endif %}
+                </small>
+                <small class="home-text-small text-muted font-weight-bold">
+
+                  <i class="fa fa-calendar"></i>
+                  {{ article.publish|date:"d-m-Y H:i" }}
+
+                </small>
+              </div>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+
+	<div class="container">
+
+		<div class="text-center my-5">
+			<button type="button" class="load-more home-text btn btn-outline-dark">Load more posts</button>
+		</div>
+
+	</div>
+
+
+  <div class="w-100" style="background: #11132b !important; color: #B1ADA8;">
+
+    <div class="container row mx-auto py-3">
+
+      <div class="category-list col-12 col-sm-6 col-md-4 col-xl-2 my-2 my-lg-5">
+
+        <div class="mx-auto" style="width: fit-content;">
+
+          <h4 class="home-heading mb-4">NEWS</h4>
+
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Bitcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ethereum News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Altcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Blockchain News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Litecoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ripple News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Business News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Technology News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Policy & Regulations</a>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="category-list col-12 col-sm-6 col-md-4 col-xl-2 my-2 my-lg-5">
+
+        <div class="mx-auto" style="width: fit-content;">
+
+          <h4 class="home-heading mb-4">NEWS</h4>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Bitcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ethereum News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Altcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Blockchain News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Litecoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ripple News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Business News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Technology News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Policy & Regulations</a>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="category-list col-12 col-sm-6 col-md-4 col-xl-2 my-2 my-lg-5">
+
+        <div class="mx-auto" style="width: fit-content;">
+
+          <h4 class="home-heading mb-4">NEWS</h4>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Bitcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ethereum News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Altcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Blockchain News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Litecoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ripple News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Business News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Technology News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Policy & Regulations</a>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="category-list col-12 col-sm-6 col-md-4 col-xl-2 my-2 my-lg-5">
+
+        <div class="mx-auto" style="width: fit-content;">
+
+          <h4 class="home-heading mb-4">NEWS</h4>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Bitcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ethereum News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Altcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Blockchain News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Litecoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ripple News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Business News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Technology News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Policy & Regulations</a>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="category-list col-12 col-sm-6 col-md-4 col-xl-2 my-2 my-lg-5">
+
+        <div class="mx-auto" style="width: fit-content;">
+
+          <h4 class="home-heading mb-4">NEWS</h4>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Bitcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ethereum News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Altcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Blockchain News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Litecoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ripple News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Business News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Technology News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Policy & Regulations</a>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="category-list col-12 col-sm-6 col-md-4 col-xl-2 my-2 my-lg-5">
+
+        <div class="mx-auto" style="width: fit-content;">
+
+          <h4 class="home-heading mb-4">NEWS</h4>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Bitcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ethereum News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Altcoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Blockchain News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Litecoin News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Ripple News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Business News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Technology News</a>
+          </p>
+          <p class="home-heading">
+            <a class="category-link-footer text-white" href="#">Policy & Regulations</a>
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+{% endblock %}

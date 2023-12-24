@@ -1,0 +1,108 @@
+{% extends 'registration/base.html' %}
+
+
+{% block content %}
+
+  <!-- MAIN -->
+  <div class="col p-4">
+
+    <div class="table-responsive mt-3">
+      <h2>Article List</h2>
+      <input class="form-control my-4 " id="myInput" type="text" placeholder="Search..">
+      <table class="table table-striped shadow-sm">
+        <thead>
+        <tr>
+          <th>title</th>
+          <th>thumbnail</th>
+          <th>category</th>
+          <th>author</th>
+          <th>description</th>
+          <th>publish</th>
+          <th>status</th>
+        </tr>
+        </thead>
+
+        <tbody id="myTable">
+
+        {% for article in object_list %}
+
+          <tr style="height: 100px;">
+            <td>
+
+              {% if article.status in 'bd'|make_list or user.is_superuser %}
+                <a href="{% url 'account:article-update' article.pk %}">
+                  {{ article.title }}
+                </a>
+              {% else %}
+                {{ article.title }}
+              {% endif %}
+
+            </td>
+            <td>
+
+              <img src="{{ article.thumbnail.url }}" width="120">
+
+            </td>
+            <td>
+
+              {{ article.category_to_str }}
+
+            </td>
+            <td>
+
+              {% if article.author.get_full_name %}
+                {{ article.author.get_full_name }}
+              {% else %}
+                {{ article.author.username }}
+              {% endif %}
+
+            </td>
+            <td>
+
+              {{ article.description|striptags|truncatewords:"10" }}
+
+            </td>
+            <td>
+
+              {{ article.publish }}
+
+            </td>
+            <td>
+
+              {% if article.status == 'p' %}
+                <span class="badge badge-success">published</span><br>
+                <a target="_blank" class="badge badge-primary"
+                   href="{% url 'blog:detail' article.slug %}">show</a><br>
+              {% elif article.status == 'i' %}
+                <span class="badge" style="background-color: #32f4df;">pending...</span><br>
+                {% if user.is_superuser %}
+                  <a target="_blank" class="badge badge-secondary"
+                     href="{% url 'blog:preview' article.pk %}">preview</a><br>
+                {% endif %}
+              {% elif article.status == 'd' %}
+                <span class="badge badge-danger">draft</span><br>
+                <a target="_blank" class="badge badge-secondary"
+                   href="{% url 'blog:preview' article.pk %}">preview</a><br>
+              {% else %}
+                <span class="badge badge-warning">rejected !</span><br>
+              {% endif %}
+              {% if user.is_superuser %}
+                <a target="_blank" class="badge badge-danger"
+                   href="{% url 'account:article-delete' article.pk %}">delete</a>
+              {% endif %}
+
+            </td>
+          </tr>
+
+        {% endfor %}
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- Main Col END -->
+
+{% endblock %}

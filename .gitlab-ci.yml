@@ -1,0 +1,22 @@
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    # - echo "This job builds something."
+    # Activate the virtual environment
+    - sudo -s source /home/gitlab-runner/builds/iAqeJ3Ua/0/cryptoland_laboratory/venv/bin/activate
+    # Go to the source of project
+    - cd /home/gitlab-runner/builds/iAqeJ3Ua/0/cryptoland_laboratory/crypna/
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+    - python3 manage.py migrate --run-syncdb
+    - python3 manage.py collectstatic
+    # - python3 -m pip freeze
+    # Delete the "price_exists" object in the cache so that the socket continue getting prices from Binance.
+    - redis-cli del :1:price_exists
+    # - sudo systemctl status daphne-crypna.service
+    - sudo systemctl restart daphne-crypna.service
+    # - sudo systemctl status daphne-crypna.service
+    - echo "😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹 😍 🌹"

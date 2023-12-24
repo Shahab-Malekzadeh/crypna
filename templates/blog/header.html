@@ -1,0 +1,146 @@
+{% load static %}
+{% load base_tags %}
+
+<div class="py-2" style="background: #11132b !important; color: #B1ADA8;">
+
+  <div class="container row mx-auto">
+
+    <div class="logo-container d-flex justify-content-center">
+      <a href="#">
+        <img class="site-logo" src="{% static 'blog/img/000021.png' %}" alt="Crypna">
+      </a>
+    </div>
+
+
+    <div class="price-container mx-auto py-2">
+
+      <div class="currency-box row mx-auto">
+
+        <div class="price-box col text-center px-1">
+          <div class="row d-flex justify-content-center">
+            <img class="currency-img mx-1 my-2" src="{% static 'blog/img/CryptoCurrency/bitcoin.png' %}">
+            <p class="home-text mx-1 my-2">BTC</p>
+          </div>
+          <p id="price0" class="home-text my-1">...</p>
+          <small id="last-change0" class="home-text-small">...</small>
+        </div>
+
+        <div class="price-box col text-center px-1">
+          <div class="row d-flex justify-content-center">
+            <img class="currency-img mx-1 my-2" src="{% static 'blog/img/CryptoCurrency/ethereum.png' %}">
+            <p class="home-text mx-1 my-2">ETH</p>
+          </div>
+          <p id="price1" class="home-text my-1">...</p>
+          <small id="last-change1" class="home-text-small">...</small>
+        </div>
+
+        <div class="price-box col text-center px-1">
+          <div class="row d-flex justify-content-center">
+            <img class="currency-img mx-1 my-2" src="{% static 'blog/img/CryptoCurrency/litecoin.png' %}">
+            <p class="home-text mx-1 my-2">LTC</p>
+          </div>
+          <p id="price2" class="home-text my-1">...</p>
+          <small id="last-change2" class="home-text-small">...</small>
+        </div>
+
+        <div class="price-box col text-center px-1">
+          <div class="row d-flex justify-content-center">
+            <img class="currency-img mx-1 my-2" src="{% static 'blog/img/CryptoCurrency/ripple_xpr.png' %}">
+            <p class="home-text mx-1 my-2">XRP</p>
+          </div>
+          <p id="price3" class="home-text my-1">...</p>
+          <small id="last-change3" class="home-text-small">...</small>
+        </div>
+
+        <div class="price-box col text-center px-1">
+          <div class="row d-flex justify-content-center">
+            <img class="currency-img mx-1 my-2" src="{% static 'blog/img/CryptoCurrency/bitcoincash.png' %}">
+            <p class="home-text mx-1 my-2">BCH</p>
+          </div>
+          <p id="price4" class="home-text my-1">...</p>
+          <small id="last-change4" class="home-text-small">...</small>
+        </div>
+
+        <div class="col text-center px-1">
+          <div class="row d-flex justify-content-center">
+            <img class="currency-img mx-1 my-2" src="{% static 'blog/img/CryptoCurrency/EOS.png' %}">
+            <p class="home-text mx-1 my-2">EOS</p>
+          </div>
+          <p id="price5" class="home-text my-1">...</p>
+          <small id="last-change5" class="home-text-small">...</small>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="lang-container d-flex justify-content-center align-items-center">
+      <a class="home-text text-light" href="http://crypna.com">EN</a>
+      <span style="color: #606060;">/</span>
+      <a class="home-text text-light" href="http://fa.crypna.com">FA</a>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-warning p-0">
+
+  <button class="navbar-toggler home-text border-0" type="button" data-toggle="collapse" data-target="#navbarToggler"
+          aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler">
+
+    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link home-text text-center font-weight-bold" href="#">Home</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link home-text text-center dropdown-toggle font-weight-bold" href="#" id="navbardrop1"
+           data-toggle="dropdown" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu shadow border-0 m-0 p-0">
+          <a class="dropdown-item home-text text-center font-weight-bold" href="#">Link 1</a>
+          <a class="dropdown-item home-text text-center font-weight-bold" href="#">Link 2</a>
+          <a class="dropdown-item home-text text-center font-weight-bold" href="#">Link 3</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link home-text text-center dropdown-toggle font-weight-bold" href="#" id="navbardrop2"
+           data-toggle="dropdown" aria-expanded="false">
+          categories
+        </a>
+
+        {% categories %}
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link home-text text-center dropdown-toggle font-weight-bold" href="#" id="navbardrop3"
+           data-toggle="dropdown" aria-expanded="false">
+          Authors
+        </a>
+
+        {% authors %}
+
+      </li>
+
+      <li class="nav-item d-flex align-items-center ml-0 ml-lg-3 py-3 py-lg-0">
+
+        <span class="home-text text-center font-weight-bold mx-auto" id="show_time"></span>
+
+      </li>
+
+    </ul>
+  </div>
+</nav>

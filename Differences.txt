@@ -1,0 +1,213 @@
+# =================================================================================================================== #
+# Differences between crypna.com and staging.crypna.com
+# ======= settings.py ======= .gitlab-ci.yml =======
+# =================================================================================================================== #
+#
+# settings.py: ==>
+# ==============================
+# ALLOWED_HOSTS = ...
+# DATABASES = ...
+# MEDIA_ROOT = ...
+# ==============================
+
+# .gitlab-ci.yml: ==>
+# ==============================
+# sudo -s source /home/gitlab-runner/builds/tND2Cxdt/0/shahabmlk2020/venv/bin/activate
+# cd /home/gitlab-runner/builds/tND2Cxdt/0/shahabmlk2020/fa-language-staging-crypna/
+# sudo systemctl status daphne-crypna.service   <=>  sudo systemctl status daphne-staging.service
+# sudo systemctl restart daphne-crypna.service  <=>  sudo systemctl restart daphne-staging.service
+# sudo systemctl status daphne-crypna.service   <=>  sudo systemctl status daphne-staging.service
+# ==============================
+
+# =================================================================================================================== #
+# Differences between crypna.com and fa.crypna.com
+# ===== account/models.py ===== blog/models.py ===== Crypna/settings.py ===== static/blog/custom.css =====
+# ===== static/blog/base.js ===== blog/category_navbar.html ===== blog/article_detail.html =====
+# ===== blog/article_list.html ===== blog/author_list.html ===== blog/base.html ===== blog/category_list.html =====
+# ===== blog/footer.html ===== blog/header.html ===== blog/home.html ===== .gitlab-ci.yml =====
+# =================================================================================================================== #
+
+# account/models.py: ==>
+# ==============================
+# email = models.EmailField(unique=True, verbose_name='ایمیل')
+# is_author = models.BooleanField(default=False, verbose_name='وضعیت نویسندگی')
+# bio = models.TextField(blank=True, null=True, verbose_name="مختصری از نویسنده")
+# ==============================
+
+# blog/models.py: ==>
+# ==============================
+# ip_address = models.GenericIPAddressField(verbose_name='آدرس ip')
+# verbose_name='زیردسته')
+# title = models.CharField(max_length=200, verbose_name="عنوان دسته بندی")
+# slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس دسته بندی")
+# status = models.BooleanField(default=True, verbose_name="آیا نمایش داده شود؟")
+# position = models.IntegerField(verbose_name="پوزیشن")
+# verbose_name = "دسته بندی"
+# verbose_name_plural = "دسته بندی ها"
+# ('d', 'پیش نویس'),  # draft
+# ('p', 'منتشر شده'),  # published
+# ('i', 'در حال بررسی'),  # investigation
+# ('b', 'برگشت خورده'),  # back
+# related_name='auth_art', verbose_name="نویسنده")
+# title = models.CharField(max_length=200, verbose_name="عنوان مقاله")
+# slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس مقاله")
+# category = models.ManyToManyField(Category, verbose_name="دسته بندی", related_name="cat_art")
+# in_main_slider = models.BooleanField(default=False, verbose_name="اسلایدر اصلی")
+# editors_choice = models.BooleanField(default=False, verbose_name="انتخاب نویسنده ها")
+# description = models.TextField(verbose_name="محتوا")
+# thumbnail = models.ImageField(upload_to='image/', verbose_name="تصویر مقاله")
+# publish = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
+# status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
+# admin_comment = models.TextField(blank=True, null=True, verbose_name="توضیحات ادمین و نویسنده")
+# hits = models.ManyToManyField(IPAddress, blank=True, related_name='hits', verbose_name='بازدیدها')
+# verbose_name = "مقاله"
+# verbose_name_plural = "مقالات"
+# jpublish.short_description = "زمان انتشار"
+# thumbnail_tag.short_description = "عکس"
+# category_to_str.short_description = "دسته بندی"
+# return str(seconds) + " ثانیه گذشته"
+# return str(minutes) + " دقیقه گذشته"
+# return str(hours) + " ساعت گذشته"
+# return str(days) + " روز گذشته"
+# return str(months) + " ماه گذشته"
+# return str(years) + " سال گذشته"
+# ==============================
+
+# Crypna/settings.py: ==>
+# ==============================
+# ALLOWED_HOSTS = ...
+# LANGUAGE_CODE = ...
+# TIME_ZONE = ...
+# MEDIA_ROOT = ...
+# ==============================
+
+# static/blog/custom.css: ==>
+# ==============================
+# body
+# .custom-container-yellow @media (min-width: 992px) {
+# .navbar-toggler
+# .time-and-search
+# .btn-search
+# .navbar-expand-lg .navbar-nav .dropdown-menu @media (min-width: 992px) {
+# .carousel-caption-top div.row p
+# .carousel-caption
+# .carousel-caption .row
+# .carousel-box @media (min-width: 992px) {
+# .post-slider .post-wrapper .post .post-info .author-date
+# .category-yellow-carousel
+# .category-yellow
+# .detail-custom-container @media (min-width: 1440px) {
+# .article-title .article-title-h3
+# .post-body @media (min-width: 992px) {
+# .post-body-sidebar @media (max-width: 767.5px) {
+# .post-body-right-container @media (max-width: 1099px) {
+# .left-container @media (max-width: 1099px) {
+# ==============================
+
+# static/blog/base.js: ==>
+# ==============================
+# show_time() {
+# load-more.click jpublish publish
+# ==============================
+
+# blog/category_navbar.html: ==>
+# ==============================
+# <a>خانه</a>
+# ==============================
+
+# blog/article_detail.html: ==>
+# ==============================
+# class="col-12 mx-auto text-justify pr-0 pl-0 pl-lg-3"
+# class="my-auto mr-2 text-muted small"
+# <span class="post-date"><i class="fa fa-calendar"></i> {{ object.jpublish }}</span>
+# <span class="post-comment mx-2 replace-digits">
+# <strong>آموزش جامع بلاک چین</strong>
+# <i class="fa fa-graduation-cap mr-2"> </i> شروع دوره
+# <div class="card-header">آیا تمایل دارید از آخرین اخبار مطلع شوید؟</div>
+# <label for="defaultFormEmailEx" class="grey-text">ایمیل</label>
+# <label for="defaultFormNameEx" class="grey-text">نام و نام خانوادگی</label>
+# <button class="btn btn-info btn-md waves-effect waves-light" type="submit">ثبت نام</button>
+# <div class="card-header">مقالات مرتبط</div>
+# <div class="tagcloud margin-30"> تگ ها
+# ==============================
+
+# blog/article_list.html: ==>
+# ==============================
+# jumbotron
+# <small class="text-muted ml-3"> jpublish
+# <i class="fa fa-eye mr-3"></i>
+# <strong>آموزش جامع بلاک چین</strong>
+# <i class="fa fa-graduation-cap mr-2"> </i> شروع دوره
+# <div class="card-header">آیا تمایل دارید از آخرین اخبار مطلع شوید؟</div>
+# <label for="defaultFormEmailEx" class="grey-text">ایمیل</label>
+# <label for="defaultFormNameEx" class="grey-text">نام و نام خانوادگی</label>
+# <button class="btn btn-info btn-md waves-effect waves-light" type="submit">ثبت نام</button>
+# <div class="card-header">مقالات مرتبط</div>
+# <div class="tagcloud margin-30"> تگ ها
+# ==============================
+
+# blog/author_list.html: ==>
+# ==============================
+# <h3 class="alert alert-primary text-center">نویسنده : {{ author.get_full_name }}</h3>
+# ==============================
+
+# blog/base.html: ==>
+# ==============================
+# <html lang="fa">
+# ==============================
+
+# blog/category_list.html: ==>
+# ==============================
+# <h3 class="alert alert-primary text-center">دسته بندی : {{ category.title }}</h3>
+# ==============================
+
+# blog/footer.html: ==>
+# ==============================
+# <p>دانلود نرم افزار</p>
+# <p class="text-white">عضویت در خبرنامه</p>
+# <button class="btn" style="background: #FABF2C;" type="button">عضویت</button>
+# <input dir="rtl" type="text" class="form-control" style="background: #11132B;" placeholder="ایمیل"
+# ==============================
+
+# blog/header.html: ==>
+# ==============================
+# aria-haspopup="true" aria-expanded="false">اخبار</a>
+# <a class="dropdown-item" href="#">ایران</a>
+# <a class="dropdown-item" href="#">بین الملل</a>
+# <a class="nav-link" href="#">مجله خبری</a>
+# <a class="nav-link" href="#">مقالات آموزشی</a>
+# <a class="nav-link" href="#">چند رسانه ای</a>
+# <a class="nav-link" href="#">شهروند خبرنگار</a>
+# placeholder="جستجو" aria-label="Search">
+# <span class="nav-link-time replace-digits" id="show_time"></span>
+# ==============================
+
+# blog/home.html: ==>
+# ==============================
+# {% for cat in article.category.active %} توسط
+# <span class="replace-digits"> {{ article.when_published }} </span>
+# <h1>هیچ عکسی وجود ندارد</h1>
+# <a class="nav-link nav-tab active" data-toggle="pill" href="#home">انتخاب سردبیر</a>
+# <a class="nav-link nav-tab" data-toggle="pill" href="#menu1">داغ ترین اخبار</a>
+# <h2>هیچ گزینه ای برای انتخاب سردبیر وجود ندارد</h2>
+# <h2>هیچ گزینه ای برای داغ ترین اخبار وجود ندارد</h2>
+# <div dir="rtl" class="post-info position-relative">
+# <i class="fa fa-calendar"></i><span> {{ article.jpublish }} </span>
+# <i class='fa fa-calendar'></i> {{ article.jpublish }}
+# <h4 style="">اخبار</h4>
+# <h4>امکانات</h4>
+# <h4>ابزارهای مارکت</h4>
+# <h4>کریپتوپدیا</h4>
+# <h4>صنایع</h4>
+# <h4>درباره ما</h4>
+# ==============================
+
+
+# .gitlab-ci.yml: ==>
+# ==============================
+# sudo -s source /home/gitlab-runner/builds/tND2Cxdt/0/shahabmlk2020/venv/bin/activate
+# cd /home/gitlab-runner/builds/tND2Cxdt/0/shahabmlk2020/fa-language-staging-crypna/
+# #    - sudo systemctl status daphne-fa-staging.service
+#     - sudo systemctl restart daphne-fa-staging.service
+# #    - sudo systemctl status daphne-fa-staging.service
+# ==============================

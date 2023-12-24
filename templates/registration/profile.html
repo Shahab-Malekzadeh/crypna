@@ -1,0 +1,64 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_filters %}
+{% load django_hide %}
+
+{% block content %}
+
+  <!-- MAIN -->
+
+  <div class="col p-4">
+
+    <div class="card">
+
+      <div class="card-header bg-primary text-white">
+        <h3 class="card-title mb-0 float-left">Profile</h3>
+      </div>
+
+      <form method="post" enctype="multipart/form-data">{% h_csrf_token %}
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              {{ form.username|as_crispy_field }}
+            </div>
+            <div class="col-12 col-lg-6">
+              {{ form.email|as_crispy_field }}
+            </div>
+            <div class="col-12 my-4">
+              <span>To change the password click <a href="#"> this </a>link. </span>
+              <span class="menu-collapsed badge badge-danger ml-3">soon</span>
+            </div>
+            <div class="col-12 col-lg-6">
+              {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-12 col-lg-6">
+              {{ form.last_name|as_crispy_field }}
+            </div>
+            <div class="col-12">
+              {{ form.is_author|as_crispy_field }}
+            </div>
+            <div class="col-12 col-lg-6">
+              <label>Biography</label>
+              <br>
+              {{ form.bio|as_crispy_field }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-footer">
+
+          <button class="btn btn-success">Save Changes</button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- Main Col END -->
+
+{% endblock %}

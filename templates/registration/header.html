@@ -1,0 +1,56 @@
+<!-- Bootstrap NavBar -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+
+  <a class="navbar-brand" href="#">
+    <span>Admin panel</span>
+  </a>
+
+  <a class="nav-link text-white" href="{% url 'logout' %}">
+    <i class="fa fa-sign-out" aria-hidden="true"></i>
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+        <a class="nav-link mx-auto" href="{% url 'account:home' %}" style="width: fit-content;">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mx-auto" href="{% url 'blog:home' %}" target="_blank"
+           style="width: fit-content;">Crypna.com</a>
+      </li>
+
+      <!--
+      This menu is hidden in bigger devices with d-sm-none.
+      The sidebar isn't proper for smaller screens imo, so this dropdown menu can
+      keep all the useful sidebar items exclusively for smaller screens.
+      -->
+      <li class="nav-item dropdown d-sm-block d-md-none">
+        <a class="nav-link dropdown-toggle mx-auto" href="#" id="smallerscreenmenu" data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false" style="width: fit-content;"> Menu </a>
+        <div class="dropdown-menu shadow bg-dark" aria-labelledby="smallerscreenmenu">
+          <a class="dropdown-item text-light mx-auto" href="#" style="width: fit-content;">Article List</a>
+          <a class="dropdown-item text-light mx-auto" href="#" style="width: fit-content;">Article Create</a>
+          <a class="dropdown-item text-light mx-auto" href="#" style="width: fit-content;">Category List</a>
+          <a class="dropdown-item text-light mx-auto" href="#" style="width: fit-content;">Category Create</a>
+          <a class="dropdown-item text-light mx-auto" href="#" style="width: fit-content;">Profile</a>
+        </div>
+      </li>
+      <!-- Smaller devices menu END -->
+
+    </ul>
+  </div>
+
+
+</nav>
+
+
+<!-- NavBar END -->

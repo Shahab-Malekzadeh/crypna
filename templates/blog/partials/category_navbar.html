@@ -1,0 +1,11 @@
+<div class="dropdown-menu shadow border-0 m-0 p-0">
+
+  {% for category in all_categories %}
+
+    <a class="dropdown-item home-text text-center font-weight-bold" href="{% url 'blog:category' category.slug %}">
+      {{ category.title }}
+    </a>
+
+  {% endfor %}
+
+</div>

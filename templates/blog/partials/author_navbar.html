@@ -1,0 +1,11 @@
+<div class="dropdown-menu shadow border-0 m-0 p-0">
+
+  {% for author in all_authors %}
+
+    <a class="dropdown-item home-text text-center font-weight-bold" href="{% url 'blog:author' author.username %}">
+      {{ author.username }}
+    </a>
+
+  {% endfor %}
+
+</div>

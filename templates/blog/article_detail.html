@@ -1,0 +1,70 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+  <!--Main layout-->
+  <main class="pt-5">
+    <div class="container row mx-auto">
+
+      <!--Section: Cards-->
+      <section class="col-xs-12 col-sm-12 col-md-12 col-lg-8 pt-5">
+
+        <!-- the actual blog post: title/author/date/content -->
+        <h1 class="detail-heading mb-3 font-weight-bold dark-grey-text">
+          <strong>{{ object.title }}</strong>
+        </h1>
+
+        <div class="row d-flex justify-content-between mt-3 px-3">
+          <p class="detail-text-small">
+            <i class="fa fa-user"></i>
+            by
+            <a href="{% url 'blog:author' object.author.username %}">{{ object.author.username }}</a>
+          </p>
+
+          <p class="detail-text-small pr-2">
+            <i class="fa fa-calendar"></i>
+            {{ object.publish }}
+          </p>
+        </div>
+
+        <!--Grid row-->
+        <div class="row mt-3">
+
+          <!--Grid column-->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-xl-12 mx-sm-auto mb-4">
+            <!--Featured image-->
+            <div class="d-flex justify-content-center">
+              <img src="{{ object.thumbnail.url }}" class="image-list rounded img-fluid" alt="">
+            </div>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-12 col-sm-12 col-md-12 col-xl-12 mx-sm-auto mb-4">
+
+            <p class="detail-text grey-text h5">
+
+              {{ object.description|safe }}
+
+            </p>
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </section>
+      <!--Section: Cards-->
+
+
+      {% include 'blog/sidebar.html' %}
+
+
+    </div>
+
+  </main>
+  <!--Main layout-->
+
+{% endblock %}
